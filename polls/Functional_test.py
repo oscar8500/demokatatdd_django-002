@@ -2,7 +2,6 @@ __author__ = 'asistente'
 from unittest import TestCase
 
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 
 
 class FunctionalTest(TestCase):
@@ -72,6 +71,8 @@ class FunctionalTest(TestCase):
 
         nombreUsuario = self.browser.find_element_by_id('id_username1')
         nombreUsuario.send_keys('juan645')
+        # clave = self.browser.find_element_by_id('id_password')
+        #clave.send_keys('clave123')
 
         clave = self.browser.find_element_by_id('id_password1')
         clave.send_keys('clave123')
