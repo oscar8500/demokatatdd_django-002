@@ -2,6 +2,7 @@ __author__ = 'asistente'
 from unittest import TestCase
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 
 class FunctionalTest(TestCase):
@@ -11,7 +12,7 @@ class FunctionalTest(TestCase):
 
     def tearDown(self):
         self.browser.quit()
-    #
+
     # def test_title(self):
     #     self.browser.get('http://localhost:8000')
     #     self.assertIn('Busco Ayuda', self.browser.title)
@@ -63,22 +64,36 @@ class FunctionalTest(TestCase):
     #     h2 = self.browser.find_element(By.XPATH, '//h2[text()="Juan Daniel Arevalo"]')
     #
     #     self.assertIn('Juan Daniel Arevalo', h2.text)
+    #
+    # def test_login(self):
+    #     self.browser.get('http://localhost:8000')
+    #     link = self.browser.find_element_by_id('id_login')
+    #     link.click()
+    #
+    #     nombreUsuario = self.browser.find_element_by_id('id_username1')
+    #     nombreUsuario.send_keys('juan645')
+    #     # clave = self.browser.find_element_by_id('id_password')
+    #     # clave.send_keys('clave123')
+    #
+    #     clave = self.browser.find_element_by_id('id_password1')
+    #     clave.send_keys('clave123')
+    #
+    #     botonGrabar = self.browser.find_element_by_id('id_entrar')
+    #     botonGrabar.click()
+    #     self.browser.implicitly_wait(3)
+    #     span = self.browser.find_elements_by_class_name("glyphicon-log-out")
+    #     self.assertTrue(len(span) > 0)
 
-    def test_login(self):
+    def test_comentar(self):
         self.browser.get('http://localhost:8000')
-        link = self.browser.find_element_by_id('id_login')
-        link.click()
-
-        nombreUsuario = self.browser.find_element_by_id('id_username1')
-        nombreUsuario.send_keys('juan645')
-        # clave = self.browser.find_element_by_id('id_password')
-        #clave.send_keys('clave123')
-
-        clave = self.browser.find_element_by_id('id_password1')
-        clave.send_keys('clave123')
-
-        botonGrabar = self.browser.find_element_by_id('id_entrar')
-        botonGrabar.click()
+        span = self.browser.find_element(By.XPATH, '//span[text()="Juan Daniel Arevalo"]')
+        span.click()
         self.browser.implicitly_wait(3)
-        span=self.browser.find_elements_by_class_name("glyphicon-log-out")
-        self.assertTrue(len(span)>0)
+
+        correo = self.browser.find_element_by_id('correo')
+        correo.send_keys('1@1.com')
+        comentario= self.browser.find_element_by_id('comentario')
+        comentario.send_keys('Este es un comentario')
+        botonGrabar = self.browser.find_element_by_id('id_submitComentario')
+        botonGrabar.click()
+
