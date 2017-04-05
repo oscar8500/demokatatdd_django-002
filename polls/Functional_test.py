@@ -97,3 +97,7 @@ class FunctionalTest(TestCase):
         botonGrabar = self.browser.find_element_by_id('id_submitComentario')
         botonGrabar.click()
 
+        p = self.browser.find_element(By.XPATH, '//p[text()="Este es un comentario"]')
+        self.assertIn('Este es un comentario', p.text)
+
+
