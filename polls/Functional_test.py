@@ -72,4 +72,4 @@ class FunctionalTest(TestCase):
 
         self.browser.implicitly_wait(3)
 
-        usuario = self.browser.find_element_by_id('login-username')
+        usuario = self.browser.find_element_by_id('id_username')
