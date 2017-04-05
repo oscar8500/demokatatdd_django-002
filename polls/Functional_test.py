@@ -3,6 +3,8 @@ from unittest import TestCase
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class FunctionalTest(TestCase):
@@ -98,14 +100,8 @@ class FunctionalTest(TestCase):
         botonGrabar.click()
 
         self.browser.implicitly_wait(5)
-        self.browser.implicitly_wait(5)
-
-        span = self.browser.find_elements_by_class_name('alert')
-        self.browser.implicitly_wait(5)
-        span[0].click()
-
-        link = self.browser.find_element_by_id('id_editar')
-        self.browser.implicitly_wait(10)
+        link = WebDriverWait( self.browser, 60).until(EC.presence_of_element_located((By.ID, 'id_editar')))
+        #visibility_of_element_located
         link.click()
 
         self.browser.implicitly_wait(5)
@@ -123,7 +119,7 @@ class FunctionalTest(TestCase):
 
         self.browser.implicitly_wait(5)
 
-        botonGrabar = self.browser.find_element_by_id('id_grabar')
+        botonGrabar = self.browser.find_element_by_id('id_modificar')
         botonGrabar.click()
         self.browser.implicitly_wait(5)
 
