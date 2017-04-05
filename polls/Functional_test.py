@@ -78,9 +78,58 @@ class FunctionalTest(TestCase):
 
         botonGrabar = self.browser.find_element_by_id('id_entrar')
         botonGrabar.click()
+
         self.browser.implicitly_wait(3)
         span = self.browser.find_elements_by_class_name("glyphicon-log-out")
         self.assertTrue(len(span) > 0)
+
+    def test_t5(self):  # Editar
+        self.browser.get('http://localhost:8000')
+        link = self.browser.find_element_by_id('id_login')
+        link.click()
+
+        nombreUsuario = self.browser.find_element_by_id('id_username1')
+        nombreUsuario.send_keys('juan645')
+
+        clave = self.browser.find_element_by_id('id_password1')
+        clave.send_keys('clave123')
+
+        botonGrabar = self.browser.find_element_by_id('id_entrar')
+        botonGrabar.click()
+
+        self.browser.implicitly_wait(5)
+        self.browser.implicitly_wait(5)
+
+        span = self.browser.find_elements_by_class_name('alert')
+        self.browser.implicitly_wait(5)
+        span[0].click()
+
+        link = self.browser.find_element_by_id('id_editar')
+        self.browser.implicitly_wait(10)
+        link.click()
+
+        self.browser.implicitly_wait(5)
+
+        experiencia = self.browser.find_element_by_id('id_aniosExperiencia')
+        experiencia.clear()
+        experiencia.send_keys('1')
+
+        telefono = self.browser.find_element_by_id('id_telefono')
+        telefono.clear()
+        telefono.send_keys('3164177888')
+
+        imagen = self.browser.find_element_by_id('id_imagen')
+        imagen.send_keys('C:\imagen.png')
+
+        self.browser.implicitly_wait(5)
+
+        botonGrabar = self.browser.find_element_by_id('id_grabar')
+        botonGrabar.click()
+        self.browser.implicitly_wait(5)
+
+        link = self.browser.find_element_by_id('id_logout')
+
+        self.assertIsNotNone(link)
 
     def test_t6(self):  #test_comentar
         self.browser.get('http://localhost:8000')

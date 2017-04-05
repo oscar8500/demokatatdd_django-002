@@ -13,6 +13,7 @@ from .models import TiposDeServicio
 from .models import Trabajador, TrabajadorForm, UserForm, Comentario
 
 
+@csrf_exempt
 def index(request):
     trabajadores = Trabajador.objects.all()
     tipos_de_servicios = TiposDeServicio.objects.all()
@@ -24,6 +25,7 @@ def index(request):
     return render(request, 'polls/index.html', context)
 
 
+@csrf_exempt
 def login(request):
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
@@ -37,12 +39,14 @@ def login(request):
         return HttpResponseRedirect('/')
 
 
+@csrf_exempt
 def logout(request):
     auth.logout(request)
     messages.info(request, "Cerraste sesión exitosamente", extra_tags="alert-info")
     return HttpResponseRedirect('/')
 
 
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -68,6 +72,7 @@ def register(request):
     return HttpResponseRedirect('/')
 
 
+@csrf_exempt
 def editar_perfil(request, idTrabajador):
     trabajador = Trabajador.objects.get(usuarioId=idTrabajador)
     if request.method == 'POST':
@@ -114,15 +119,18 @@ def mostrarComentarios(request, idTrabajador):
     return HttpResponse(serializers.serialize("json", lista_comentarios))
 
 
+@csrf_exempt
 def getTiposDeServicio(request, pk):
     tipo = TiposDeServicio.objects.get(pk=pk)
     return HttpResponse(serializers.serialize("json", [tipo]))
 
 
+@csrf_exempt
 def detalle_trabajador(request):
     return render(request, "polls/detalle.html")
 
 
+@csrf_exempt
 def detail(request, pk):
     trabajador = get_object_or_404(Trabajador, pk=pk)
     return HttpResponse(serializers.serialize("json", [trabajador]))
