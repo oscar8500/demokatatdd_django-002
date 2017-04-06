@@ -91,7 +91,3 @@ ENV/
 .ropeproject
 
 # Basura
-photos
-migrations
-static
-db.sqlite3

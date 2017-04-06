@@ -3,8 +3,6 @@ from unittest import TestCase
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 
 class FunctionalTest(TestCase):
@@ -100,8 +98,16 @@ class FunctionalTest(TestCase):
         botonGrabar.click()
 
         self.browser.implicitly_wait(5)
-        link = WebDriverWait( self.browser, 60).until(EC.presence_of_element_located((By.ID, 'id_editar')))
+        # link = WebDriverWait( self.browser, 60).until(EC.presence_of_element_located((By.ID, 'id_editar')))
         #visibility_of_element_located
+        self.browser.implicitly_wait(5)
+
+        span = self.browser.find_elements_by_class_name('close')
+        self.browser.implicitly_wait(15)
+        span[0].click()
+
+        link = self.browser.find_element_by_id('id_editar')
+        self.browser.implicitly_wait(10)
         link.click()
 
         self.browser.implicitly_wait(5)
@@ -123,9 +129,8 @@ class FunctionalTest(TestCase):
         botonGrabar.click()
         self.browser.implicitly_wait(5)
 
-        link = self.browser.find_element_by_id('id_logout')
-
-        self.assertIsNotNone(link)
+        span = self.browser.find_elements_by_class_name("glyphicon-log-out")
+        self.assertTrue(len(span) > 0)
 
     def test_t6(self):  #test_comentar
         self.browser.get('http://localhost:8000')
